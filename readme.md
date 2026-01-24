@@ -1,6 +1,14 @@
-# Porting to Raspberry Pi Pico (arduino-pico)
+# pico-spice-reader
 
-This project has been ported to work with the Raspberry Pi Pico using the [earlephilhower/arduino-pico](https://github.com/earlephilhower/arduino-pico) core and the **Adafruit TinyUSB** library.
+This project is a ported PN5180-cardio to work with the Raspberry Pi Pico using the [earlephilhower/arduino-pico](https://github.com/earlephilhower/arduino-pico) core and the **Adafruit TinyUSB** library.
+
+**Currently in development, not properly working. Proof-of-concept only.**
+
+Huge thanks to the Original Repository: https://github.com/CrazyRedMachine/PN5180-cardio
+
+Also thanks the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing.
+
+This repository includes AIGC contents.
 
 ## Requirements
 
@@ -33,6 +41,9 @@ The following pins are used on the Raspberry Pi Pico:
 | **RST** | GP21 | 27 |
 
 ### Matrix Keypad (Optional)
+
+Currently the Keypad is not tested working. This will remain TO-DO now.
+
 | Keypad | Pico Pin (GP) | Pico Physical Pin |
 | :--- | :--- | :--- |
 | **Row 1** | GP0 | 1 |
@@ -44,10 +55,14 @@ The following pins are used on the Raspberry Pi Pico:
 | **Col 3** | GP6 | 9 |
 
 ## Custom VID/PID
-The project is configured to use VID `0x1ccf` and PID `0x5252` (Sega/Amusement device style). If you need to reflash the device, you may need to put the Pico into BOOTSEL mode manually if the custom VID/PID prevents the IDE from auto-resetting.
+The project is configured to use VID `0x1ccf` and PID `0x5252`. If you need to reflash the device, you may need to put the Pico into BOOTSEL mode manually if the custom VID/PID prevents the IDE from auto-resetting.
 
 ## Changes made for porting:
 - Replaced the AVR/SAM-specific `PluggableUSB` code with `Adafruit_TinyUSB`.
 - Updated `CARDIOHID` class to use `Adafruit_USBD_HID`.
 - Updated pin definitions in `Config.h` to match Pico's GPIO layout.
 - Added `Cardio.begin()` to the main sketch to initialize the TinyUSB stack.
+
+## License
+
+GPL-3.0 for the code. Anything else will be CC-BY-NC 4.0.

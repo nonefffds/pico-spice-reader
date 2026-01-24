@@ -6,9 +6,25 @@ This project is a ported PN5180-cardio to work with the Raspberry Pi Pico using 
 
 Huge thanks to the Original Repository: https://github.com/CrazyRedMachine/PN5180-cardio
 
-Also thanks the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing.
+Also thanks the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing, there's no code referencing from this repository.
 
 This repository includes AIGC contents.
+
+Please notice that there's no plan in making a PN532 port.
+
+TO-DO: the card number readout have problem now.
+
+## Acknowledgment from original repository
+
+This work is based on zyp's cardio (obviously).
+
+ISO15693 code is based on [ATrappmann/PN5180-Library](https://github.com/ATrappmann/PN5180-Library).
+
+ISO14443 implementation taken from [tueddy/PN5180-Library/ISO14443](https://github.com/tueddy/PN5180-Library/tree/ISO14443).
+
+The keypad code uses the Keypad library by Mark Stanley and Alexander Brevig.
+
+Spiceapi version provided by [goat](https://github.com/goaaats) (thanks! :)), refer to SpiceAPI branch for more information.
 
 ## Requirements
 
@@ -24,9 +40,15 @@ When compiling for Raspberry Pi Pico, ensure the following settings are selected
 - **Flash Size:** (any)
 - **CPU Speed:** (default)
 
+## Usage
+
+As long as you follow the pinout below, you can drag-and-drop the uf2 file from build folder to the RPi.
+
 ## Pinout
 
 The following pins are used on the Raspberry Pi Pico:
+
+You might not need a level converter 3v3<->5v like the original approach. Currently this pinout is tested working.
 
 ### PN5180 Connection (SPI0)
 | PN5180 Pin | Pico Pin (GP) | Pico Physical Pin |

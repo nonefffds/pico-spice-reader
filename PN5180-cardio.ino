@@ -49,10 +49,6 @@ void setup() {
     exit(-1); // halt
   }
   
-  uint8_t firmwareVersion[2];
-  nfcFeliCa.readEEprom(FIRMWARE_VERSION, firmwareVersion, sizeof(firmwareVersion));
-  uint8_t eepromVersion[2];
-  nfcFeliCa.readEEprom(EEPROM_VERSION, eepromVersion, sizeof(eepromVersion));
   nfcFeliCa.setupRF();
 }
 
@@ -73,12 +69,9 @@ void loop() {
   uint8_t uid[8] = {0,0,0,0,0,0,0,0};
   uint8_t hid_data[8] = {0,0,0,0,0,0,0,0};
   
-  // PRIORITY 1: FeliCa (Suica, Aime, newer Banapassport)
-  nfcFeliCa.reset();
-#if WITH_KEYPAD == 1
-  keypadCheck();
-#endif
-  nfcFeliCa.setupRF();
+  // check for FeliCa card (Suica, Aime, newer Banapassport)
+  nfcFeliCa.loadRFConfig(0x09, 0x89); // FeliCa 424
+  delay(10); 
   uint8_t uidLength = nfcFeliCa.readCardSerial(uid);
   if (uidLength > 0) {
     Cardio.sendState(2, uid);      
@@ -87,12 +80,9 @@ void loop() {
     return;
   }
 
-  // PRIORITY 2: ISO-15693 (Older Banapassport)
-  nfc15693.reset();
-#if WITH_KEYPAD == 1
-  keypadCheck();
-#endif
-  nfc15693.setupRF();
+  // check for ISO-15693 card (Older Banapassport)
+  nfc15693.loadRFConfig(0x0d, 0x8d); // ISO15693
+  delay(10);
   ISO15693ErrorCode rc = nfc15693.getInventory(uid);
   if (rc == ISO15693_EC_OK ) {
     for (int i=0; i<8; i++) {
@@ -105,15 +95,17 @@ void loop() {
   }
 
 #if WITH_ISO14443 == 1
-  // PRIORITY 3: ISO14443 (Mifare, generic cards)
-  nfc14443.reset();
-#if WITH_KEYPAD == 1
-  keypadCheck();
-#endif
-  nfc14443.setupRF();
+  // check for ISO14443 card (Mifare, generic cards)
+  nfc14443.loadRFConfig(0x00, 0x80); // ISO14443A
+  delay(10);
   uint8_t uidLengthMF = nfc14443.readCardSerial(uid);
   if (uidLengthMF > 0) 
   {
+      // If it's a 4-byte UID, repeat it like the PN532 version does
+      if (uidLengthMF == 4) {
+        for(int i=0; i<4; i++) uid[i+4] = uid[i];
+      }
+      
       uid[0] &= 0x0F; 
       Cardio.sendState(2, uid);
       lastReport = millis();

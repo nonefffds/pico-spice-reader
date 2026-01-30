@@ -114,8 +114,15 @@ void loop() {
   uint8_t uidLengthMF = nfc14443.readCardSerial(uid);
   if (uidLengthMF > 0) 
   {
-      uid[0] &= 0x0F; 
-      Cardio.sendState(2, uid);
+      hid_data[0] = 0xE0;
+      hid_data[1] = 0x04;
+      hid_data[2] = uid[0];
+      hid_data[3] = uid[1];
+      hid_data[4] = uid[2];
+      hid_data[5] = uid[3];
+      hid_data[6] = uid[0];
+      hid_data[7] = uid[1];
+      Cardio.sendState(2, hid_data);
       lastReport = millis();
       cardBusy = 3000;
       return;

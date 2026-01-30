@@ -12,8 +12,6 @@ This repository includes AIGC contents.
 
 Please notice that there's no plan in making a PN532 port.
 
-TO-DO: the card number readout have problem now.
-
 ## Acknowledgment from original repository
 
 This work is based on zyp's cardio (obviously).
@@ -62,9 +60,9 @@ You might not need a level converter 3v3<->5v like the original approach. Curren
 | **BUSY** | GP20 | 26 |
 | **RST** | GP21 | 27 |
 
-### Matrix Keypad (Optional)
+### Matrix Keypad (not tested)
 
-Currently the Keypad is not tested working. This will remain TO-DO now.
+Currently the Keypad is not tested working and disabled by default. This will remain TO-DO now.
 
 | Keypad | Pico Pin (GP) | Pico Physical Pin |
 | :--- | :--- | :--- |
@@ -84,6 +82,12 @@ The project is configured to use VID `0x1ccf` and PID `0x5252`. If you need to r
 - Updated `CARDIOHID` class to use `Adafruit_USBD_HID`.
 - Updated pin definitions in `Config.h` to match Pico's GPIO layout.
 - Added `Cardio.begin()` to the main sketch to initialize the TinyUSB stack.
+
+## Known Issue
+
+When using Suica cards on iPhone devices, cards will be recognised as ISO14443 cards instead of felica, which will leading a card number difference problem. Osaifu keidai is tested on Kyocera KYF37 which is not affected. 
+
+This behaivior is replicable in both this repository and aic_pico repo. 
 
 ## License
 

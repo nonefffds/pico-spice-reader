@@ -2,7 +2,7 @@
 
 This project is a ported PN5180-cardio to work with the Raspberry Pi Pico using the [earlephilhower/arduino-pico](https://github.com/earlephilhower/arduino-pico) core and the **Adafruit TinyUSB** library.
 
-**Currently in development, not properly working. Proof-of-concept only.**
+**Currently in development, possibly not properly working. This is a Proof-of-concept only.**
 
 Huge thanks to the Original Repository: https://github.com/CrazyRedMachine/PN5180-cardio
 

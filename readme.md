@@ -6,11 +6,11 @@ This project is a ported PN5180-cardio to work with the Raspberry Pi Pico using 
 
 Huge thanks to the Original Repository: https://github.com/CrazyRedMachine/PN5180-cardio
 
-Also thanks the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing, there's no code referencing from this repository.
+Also thanks for the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing; there's no code referencing from aic_pico.
 
 This repository includes AIGC contents.
 
-Please notice that there's no plan in making a PN532 port.
+Please notice that there's no plan to make a PN532 port.
 
 ## Acknowledgment from original repository
 
@@ -40,13 +40,13 @@ When compiling for Raspberry Pi Pico, ensure the following settings are selected
 
 ## Usage
 
-As long as you follow the pinout below, you can drag-and-drop the uf2 file from build folder to the RPi.
+As long as you follow the pinout below, you can drag-and-drop the uf2 file from the build folder to the RPi.
 
 ## Pinout
 
 The following pins are used on the Raspberry Pi Pico:
 
-You might not need a level converter 3v3<->5v like the original approach. Currently this pinout is tested working.
+You might not need a level converter 3v3<->5v like the original approach. Currently, this pinout is tested and working.
 
 ### PN5180 Connection (SPI0)
 | PN5180 Pin | Pico Pin (GP) | Pico Physical Pin |
@@ -82,13 +82,16 @@ The project is configured to use VID `0x1ccf` and PID `0x5252`. If you need to r
 - Updated `CARDIOHID` class to use `Adafruit_USBD_HID`.
 - Updated pin definitions in `Config.h` to match Pico's GPIO layout.
 - Added `Cardio.begin()` to the main sketch to initialize the TinyUSB stack.
+- Updated PN5180 library to the latest.
 
 ## Known Issue
 
-When using Suica cards on iPhone devices, cards will be recognised as ISO14443 cards instead of felica, which will leading a card number difference problem. Osaifu keidai is tested on Kyocera KYF37 which is not affected. 
+When using Suica cards on iPhone devices, cards will be recognised as ISO14443 cards instead of felica, which will leading a card number difference problem. Osaifu keidai is tested on Kyocera KYF37, which is not affected. 
 
-This behaivior is replicable in both this repository and aic_pico repo. 
+This behavior is replicable in both this repository and aic_pico repo. 
+
+Since reading ISO14443 cards will give a hard-encoding E004 card number, it's possible to lead to a wrong card number read-out. However, I have tested with the cards I have, and they're working. If there's any problem with your ISO14443 cards, please leave an issue.
 
 ## License
 
-GPL-3.0 for the code. Anything else will be CC-BY-NC 4.0.
+GPL-3.0

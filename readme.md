@@ -92,6 +92,17 @@ This behavior is replicable in both this repository and aic_pico repo.
 
 Since reading ISO14443 cards will give a hard-encoding E004 card number, it's possible to lead to a wrong card number read-out. However, I have tested with the cards I have, and they're working. If there's any problem with your ISO14443 cards, please leave an issue.
 
+### Problem Address
+
+``All of the modules i've purchased had a fatal flaw - they have an invalid clock crystal installed on them - 27.00 MHZ instead of 27.12 MHZ.
+It is not a big problem for a passive card that will operate at the freqency given by the reader, but a total dealbreaker for a battery-powered device like an iPhone or Apple Watch, which will de-synchronize after a couple of bytes, thus causing collision/protocol/parity errors.
+
+The only way of making this module compatible is by purchasing a batch of SMD 27.12 MHZ crystals on your own, de-soldering the incorrect one and re-soldering the required one.``
+
+Referenced from https://github.com/kormax/apple-enhanced-contactless-polling/blob/main/examples/README.md
+
+The problem may be caused by the faulty crystal, and I have checked my nfc modules, it's indeed a 27Mhz one. 
+
 ## License
 
 GPL-3.0

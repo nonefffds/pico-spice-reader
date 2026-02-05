@@ -2,15 +2,15 @@
 
 This project is a ported PN5180-cardio to work with the Raspberry Pi Pico using the [earlephilhower/arduino-pico](https://github.com/earlephilhower/arduino-pico) core and the **Adafruit TinyUSB** library.
 
-**Currently in development, possibly not properly working. This is a Proof-of-concept only.**
+**Possibly not properly working. This is a Proof-of-concept.**
 
 Huge thanks to the Original Repository: https://github.com/CrazyRedMachine/PN5180-cardio
 
-Also thanks for the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing; there's no code referencing from aic_pico.
+Also thanks for the inspiration from: https://github.com/whowechina/aic_pico, I also used this project only for cross-testing the cards I have; there's no code referencing from aic_pico.
 
-This repository includes AIGC contents.
+Warning: This repository includes AIGC contents.
 
-Please notice that there's no plan to make a PN532 port.
+Please notice that there's no plan to make a PN532 port like the original repo.
 
 ## Acknowledgment from original repository
 
@@ -82,26 +82,24 @@ The project is configured to use VID `0x1ccf` and PID `0x5252`. If you need to r
 - Updated `CARDIOHID` class to use `Adafruit_USBD_HID`.
 - Updated pin definitions in `Config.h` to match Pico's GPIO layout.
 - Added `Cardio.begin()` to the main sketch to initialize the TinyUSB stack.
-- Updated PN5180 library to the latest.
+- Updated PN5180 library to the latest, from https://github.com/ATrappmann/PN5180-Library.
 
 ## Known Issue
 
-When using Suica cards on iPhone devices, cards will be recognised as ISO14443 cards instead of felica, which will leading a card number difference problem. Osaifu keidai is tested on Kyocera KYF37, which is not affected. 
+1. Since reading ISO14443 cards will give a hard-encoding E004 card number, it's possible to lead to a wrong card number read-out. However, I have tested with the cards I have, and they're working correctly. If there's any problem with your ISO14443 cards, please leave an issue.
 
-This behavior is replicable in both this repository and aic_pico repo. 
+2. Please notice, if you want to read an active card / battery-powered devices like iPhone or Apple Watch, you must change the clock crystal, or the reader will not read the card properly.
 
-Since reading ISO14443 cards will give a hard-encoding E004 card number, it's possible to lead to a wrong card number read-out. However, I have tested with the cards I have, and they're working. If there's any problem with your ISO14443 cards, please leave an issue.
+### Clock Crystal Problem Address
 
-### Problem Address
-
-``All of the modules i've purchased had a fatal flaw - they have an invalid clock crystal installed on them - 27.00 MHZ instead of 27.12 MHZ.
+> All of the modules i've purchased had a fatal flaw - they have an invalid clock crystal installed on them - 27.00 MHZ instead of 27.12 MHZ.
 It is not a big problem for a passive card that will operate at the freqency given by the reader, but a total dealbreaker for a battery-powered device like an iPhone or Apple Watch, which will de-synchronize after a couple of bytes, thus causing collision/protocol/parity errors.
 
-The only way of making this module compatible is by purchasing a batch of SMD 27.12 MHZ crystals on your own, de-soldering the incorrect one and re-soldering the required one.``
+>The only way of making this module compatible is by purchasing a batch of SMD 27.12 MHZ crystals on your own, de-soldering the incorrect one and re-soldering the required one.
 
 Referenced from https://github.com/kormax/apple-enhanced-contactless-polling/blob/main/examples/README.md
 
-The problem may be caused by the faulty crystal, and I have checked my nfc modules, it's indeed a 27Mhz one. 
+The problem is caused by the faulty crystal. I have checked my NFC modules; it's indeed a 27 MHz one. After re-soldering the correct one, the reader behaves correctly when reading Suica on iPhone.
 
 ## License
 

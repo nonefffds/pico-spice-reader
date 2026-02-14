@@ -10,7 +10,7 @@ Also thanks for the inspiration from: https://github.com/whowechina/aic_pico, I 
 
 Warning: This repository includes AIGC contents.
 
-Please notice that there's no plan to make a PN532 port like the original repo.
+Please notice that there's no plan to make a PN532 port like the original repo. Also this project will not try to implement protocols out of SpiceAPI.
 
 ## Acknowledgment from original repository
 
@@ -99,8 +99,16 @@ It is not a big problem for a passive card that will operate at the freqency giv
 
 Referenced from https://github.com/kormax/apple-enhanced-contactless-polling/blob/main/examples/README.md
 
+Another reference: https://github.com/ATrappmann/PN5180-Library/issues/8
+
+You can see the schematic of the faulty PN5180 NFC module(R1.1-170710) here: https://github.com/ATrappmann/PN5180-Library/blob/master/doc/PN5180%20R1.1-170710_SCH.PDF
+
 The problem is caused by the faulty crystal. I have checked my NFC modules; it's indeed a 27 MHz one. After re-soldering the correct one, the reader behaves correctly when reading Suica on iPhone.
 
 ## License
 
 GPL-3.0
+
+## Trademark notice
+
+FeliCa is a registered trademark of the Sony Corporation. MIFARE is a trademark of NXP Semiconductors. All other trademarks are the property of their respective owners.

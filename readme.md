@@ -105,6 +105,12 @@ You can see the schematic of the faulty PN5180 NFC module(R1.1-170710) here: htt
 
 The problem is caused by the faulty crystal. I have checked my NFC modules; it's indeed a 27 MHz one. After re-soldering the correct one, the reader behaves correctly when reading Suica on iPhone.
 
+The following picture shows the orientation of the solder pad for the crystal.
+
+<img width="1763" height="979" alt="PN5180-NFC-crystal-change" src="https://github.com/user-attachments/assets/ff2be79b-f68c-4547-ba08-275a548dd053" />
+
+Picture from : https://github.com/ATrappmann/PN5180-Library/blob/master/doc/PN5180-NFC.png
+
 ## License
 
 GPL-3.0

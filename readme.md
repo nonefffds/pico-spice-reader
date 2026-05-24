@@ -90,6 +90,8 @@ The project is configured to use VID `0x1ccf` and PID `0x5252`. If you need to r
 
 2. Please notice, if you want to read an active card / battery-powered devices like iPhone or Apple Watch, you must change the clock crystal, or the reader will not read the card properly.
 
+3. Please notice, even though a crystal is changed, the current implementation will still read fallback iso14443 UIDs when reading felica cards from active devices(iPhone etc.) , this might be fixed in next update.
+
 ### Clock Crystal Problem Address
 
 > All of the modules i've purchased had a fatal flaw - they have an invalid clock crystal installed on them - 27.00 MHZ instead of 27.12 MHZ.
@@ -110,6 +112,8 @@ The following picture shows the orientation of the solder pad for the crystal.
 <img width="1763" height="979" alt="PN5180-NFC-crystal-change" src="https://github.com/user-attachments/assets/ff2be79b-f68c-4547-ba08-275a548dd053" />
 
 Picture from : https://github.com/ATrappmann/PN5180-Library/blob/master/doc/PN5180-NFC.png
+
+Since the crystal is non-powered, the orientation is not a big deal anyway.
 
 ## License
 

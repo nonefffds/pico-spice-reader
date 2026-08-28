@@ -12,6 +12,10 @@ Warning: This repository includes AIGC contents.
 
 Please notice that there's no plan to make a PN532 port like the original repo. Also this project will not try to implement protocols out of SpiceAPI.
 
+Additional plug: the Pheonixwan + LMT NFC mod is now open at makerworld:
+Makerworld CN: https://makerworld.com.cn/zh/models/2896779-phoenixwan-lmt-feng-huang-tai-iidx-nfcgai-zhuang-t#profileId-3392397
+Makerworld Global: https://makerworld.com/zh/models/3226426-phoenixwan-lmt-iidx-nfc-modification-kit
+
 ## Acknowledgment from original repository
 
 This work is based on zyp's cardio (obviously).
